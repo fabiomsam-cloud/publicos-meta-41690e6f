@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>SOU · Públicos da Meta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f5f6f8; --surface:#ffffff; --surface-2:#f2f4f7;
+  --ink:#0f172a; --ink-2:#334155; --muted:#64748b;
+  --grid:#e5e8ee; --ring:rgba(15,23,42,.08);
+  --gold:#b7791f; --gold-soft:rgba(183,121,31,.12);
+  --blue:#2563eb; --green:#15803d; --red:#dc2626; --amber:#b45309;
+  --serie:#2a78d6;
+  --disp:"Bricolage Grotesque",sans-serif; --body:"IBM Plex Sans",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-color:#cbd5e1 var(--page)}
+body{background:var(--page);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.45;min-height:100vh;position:relative}
+body::before{content:"";position:absolute;left:0;right:0;top:0;height:520px;pointer-events:none;z-index:0;
+  background:radial-gradient(900px 380px at 85% -20%, rgba(183,121,31,.07), transparent 60%),
+             radial-gradient(700px 320px at -5% 0%, rgba(37,99,235,.05), transparent 55%)}
+.wrap{position:relative;z-index:1;max-width:1380px;margin:0 auto;padding:26px 30px 90px}
+@media(max-width:700px){.wrap{padding:18px 16px 70px}}
+
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.brand h1{font-family:var(--disp);font-weight:800;font-size:31px;letter-spacing:-.6px;line-height:1.02}
+.brand h1 em{font-style:normal;color:var(--gold)}
+.brand .sub{color:var(--muted);font-size:12.5px;margin-top:7px;letter-spacing:.2px}
+.brand .sub b{color:var(--ink-2);font-weight:600}
+.stamp{text-align:right;font-size:12px;color:var(--muted)}
+.stamp .clock{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink-2);letter-spacing:-.2px}
+.stamp b{color:var(--ink-2)}
+
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:14px;padding:20px 22px;position:relative;box-shadow:0 1px 2px rgba(15,23,42,.04);margin-bottom:12px}
+.card h2{font-family:var(--disp);font-weight:700;font-size:17px;letter-spacing:-.2px}
+.card .hint{color:var(--muted);font-size:12px;margin-top:3px;max-width:820px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.grid{display:grid;gap:12px}
+.g-two{grid-template-columns:1fr 1fr}
+@media(max-width:1080px){.g-two{grid-template-columns:1fr}}
+.note{font-size:11.5px;color:var(--muted);margin-top:12px}
+#err{display:none;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.3);color:#b42318;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px}
+.aviso{background:rgba(180,83,9,.08);border:1px solid rgba(180,83,9,.3);color:#92400e;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px}
+
+/* coleta */
+.rail{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.cd{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:8px 13px;font-size:12px;color:var(--ink-2);display:flex;gap:8px;align-items:baseline}
+.cd b{font-family:var(--disp);font-weight:800;font-size:17px;color:var(--ink);letter-spacing:-.3px}
+.cd .l{font-weight:600}
+.cd.off{border-style:dashed;color:var(--muted)}
+.cd.off b{font-family:var(--body);font-size:12px;font-weight:600;color:var(--amber)}
+
+/* abas + filtros */
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.tab{border:1px solid var(--ring);background:var(--surface);color:var(--ink-2);font-family:var(--body);font-size:13px;font-weight:600;padding:8px 15px;border-radius:10px;cursor:pointer}
+.tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tab .c{font-weight:500;opacity:.7;margin-left:5px;font-variant-numeric:tabular-nums}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.filtros select,.filtros input{font-family:var(--body);font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--ring);border-radius:9px;padding:8px 11px}
+.filtros input{flex:1;min-width:200px}
+.filtros .limpar{border:0;background:transparent;color:var(--blue);font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--body)}
+.seg{display:flex;background:var(--surface-2);border-radius:9px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--ink-2);font-family:var(--body);font-size:12px;font-weight:600;padding:5px 12px;border-radius:7px;cursor:pointer}
+.seg button.on{background:var(--gold);color:#161204}
+.chk{font-size:12.5px;color:var(--ink-2);display:flex;gap:6px;align-items:center;cursor:pointer}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:1080px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.kpis{grid-template-columns:1fr 1fr}}
+.tk{background:var(--surface);border:1px solid var(--ring);border-radius:12px;padding:13px 15px}
+.tk .l{color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.tk .v{font-family:var(--disp);font-weight:800;font-size:26px;margin-top:5px;letter-spacing:-.4px}
+.tk .s{font-size:11.5px;color:var(--muted);margin-top:3px}
+.tk.ouro{border-color:rgba(183,121,31,.45);background:linear-gradient(140deg,#fdf6e7 0%,var(--surface) 60%);cursor:pointer}
+.tk.ouro .v{color:var(--gold)}
+
+/* barras empilhadas por tipo */
+.legenda{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin-bottom:12px}
+.legenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.brow{display:grid;grid-template-columns:150px 1fr 70px;gap:10px;align-items:center;padding:7px 0}
+.brow .name{font-size:12.5px;color:var(--ink-2);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brow .track{display:flex;gap:2px;height:18px}
+.brow .sg{height:100%;min-width:3px;border-radius:0}
+.brow .sg:last-child{border-radius:0 4px 4px 0}
+.brow .num{text-align:right;font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:700}
+
+/* tabelas */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--muted);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding:8px 10px;border-bottom:1px solid var(--grid);white-space:nowrap}
+th.s{cursor:pointer;user-select:none}
+th.s:hover{color:var(--ink-2)}
+th.r,td.r{text-align:right}
+td{padding:9px 10px;border-bottom:1px solid rgba(15,23,42,.05);vertical-align:middle}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.lin{cursor:pointer}
+tr.lin:hover td{background:var(--surface-2)}
+.pn{font-weight:600;color:var(--ink);max-width:460px;overflow-wrap:anywhere}
+.pm{color:var(--muted);font-size:11px;margin-top:2px}
+.tipo{white-space:nowrap}
+.tipo i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap;letter-spacing:.02em}
+.pill.ok{background:rgba(21,128,61,.12);color:#166534}
+.pill.warn{background:rgba(180,83,9,.13);color:#92400e}
+.pill.bad{background:rgba(220,38,38,.11);color:#b42318}
+.pill.mut{background:var(--surface-2);color:var(--muted)}
+.pill.uso{background:rgba(37,99,235,.12);color:#1d4ed8}
+.pill.gold{background:var(--gold-soft);color:#8a5a12}
+.up{color:#166534;font-weight:700}
+.dn{color:#b42318;font-weight:700}
+.zz{color:var(--muted)}
+.mais{display:block;margin:14px auto 0;border:1px solid var(--ring);background:var(--surface);color:var(--ink-2);font-family:var(--body);font-size:12.5px;font-weight:600;padding:8px 18px;border-radius:9px;cursor:pointer}
+.vazio{color:var(--muted);font-size:13px;padding:18px 4px}
+h3.grp{font-family:var(--disp);font-size:14px;font-weight:700;margin:18px 0 4px;display:flex;gap:8px;align-items:baseline}
+h3.grp small{font-family:var(--body);font-weight:500;color:var(--muted);font-size:11.5px}
+tr.lk{cursor:pointer}
+tr.lk:hover td{background:var(--surface-2)}
+
+/* gaveta de detalhe */
+#veu{position:fixed;inset:0;background:rgba(15,23,42,.35);z-index:20;display:none}
+#gav{position:fixed;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--surface);z-index:21;box-shadow:-12px 0 40px rgba(15,23,42,.18);
+  padding:24px 26px 40px;overflow-y:auto;display:none}
+#gav h2{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.3px;line-height:1.2;overflow-wrap:anywhere;padding-right:34px}
+#gav .x{position:absolute;top:18px;right:18px;border:0;background:var(--surface-2);width:32px;height:32px;border-radius:9px;cursor:pointer;font-size:16px;color:var(--ink-2)}
+#gav .big{font-family:var(--disp);font-weight:800;font-size:32px;letter-spacing:-.6px;margin-top:16px}
+#gav .kv{display:grid;grid-template-columns:130px 1fr;gap:7px 12px;font-size:12.5px;margin-top:16px}
+#gav .kv span{color:var(--muted)}
+#gav .kv b{font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+#gav h4{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:22px 0 8px}
+#gav .st{background:var(--surface-2);border-radius:10px;padding:11px 13px;font-size:12.5px;color:var(--ink-2)}
+#gav .u{border-bottom:1px solid var(--grid);padding:8px 0;font-size:12.5px}
+#gav .u small{display:block;color:var(--muted);font-size:11.5px}
+#gav a{color:var(--blue);font-weight:600;font-size:12.5px;text-decoration:none}
+.copiar{border:0;background:var(--surface-2);border-radius:6px;font-size:11px;padding:2px 7px;cursor:pointer;color:var(--ink-2);margin-left:6px;font-family:var(--body)}
+.chart{position:relative;margin-top:6px}
+.chart svg{display:block;width:100%;height:auto}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:11.5px;padding:5px 9px;border-radius:7px;white-space:nowrap;transform:translate(-50%,-120%);display:none}
+footer{margin-top:26px;color:var(--muted);font-size:11.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <h1>Públicos da <em>Meta</em></h1>
+      <div class="sub">Todos os públicos das contas · <b>foto diária às 06h de Manaus</b> · o painel só lê, não altera nada na Meta</div>
+    </div>
+    <div class="stamp">
+      <div>última foto</div>
+      <div class="clock" id="dia">—</div>
+      <div id="colhido"></div>
+    </div>
+  </header>
+
+  <div id="err"></div>
+  <div id="avisos"></div>
+  <div class="rail" id="coleta"></div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="filtros">
+    <select id="f-conta" aria-label="Conta"></select>
+    <select id="f-conc" aria-label="Concurso"></select>
+    <select id="f-tipo" aria-label="Tipo"></select>
+    <input id="f-q" type="search" placeholder="Buscar pelo nome do público…" aria-label="Buscar">
+    <button class="limpar" id="f-limpar">limpar filtros</button>
+  </div>
+
+  <div id="conteudo"></div>
+
+  <footer>Sou Concurseiro e Vou Passar · painel interno · tamanhos são a faixa estimada que a Meta informa, não número exato</footer>
+</div>
+
+<div id="veu"></div>
+<aside id="gav" aria-label="Detalhe do público"></aside>
+
+<script>
+/* ================= CONFIG ================= */
+const API  = "https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/dashboard-publicos";
+const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc";
+const K = new URLSearchParams(location.search).get("k") || "";
+
+// Conta (nome que vem da coleta) → id no Gerenciador, para o link "abrir na Meta"
+const CONTAS = { "SCVP - ON-LINE":"1756974637744735", "SCVP - TRIBUNAIS":"259955114123433", "SPOTFABIO":"938873841459132",
+  "PLAYPASSEI":"692369303298960", "SOU PÓS / DIREITO POLICIAL":"435435602812260", "SCVP-SAÚDE":"1437473713335021", "SOU ELITE":"1334450503874952" };
+
+// Tipo do público (subtype da Meta). A cor é do TIPO e nunca muda com filtro.
+const TIPOS = [
+  { k:"lista", l:"Lista",                cor:"#2a78d6", subs:["CUSTOM","SUBSCRIBER_LIST"] },
+  { k:"eng",   l:"Vídeo e engajamento",  cor:"#eb6834", subs:["ENGAGEMENT"] },
+  { k:"ig",    l:"Instagram",            cor:"#1baf7a", subs:["IG_BUSINESS"] },
+  { k:"site",  l:"Site (pixel)",         cor:"#eda100", subs:["WEBSITE"] },
+  { k:"look",  l:"Semelhante",           cor:"#e87ba4", subs:["LOOKALIKE"] },
+  { k:"outro", l:"Outros",               cor:"#898781", subs:[] },
+];
+const TIPO_DE = {}; TIPOS.forEach(t => t.subs.forEach(s => TIPO_DE[s] = t));
+
+// Concurso/frente lido do NOME do público (sem acento, maiúsculo). A ordem importa: a primeira regra que casar vence.
+const W = x => new RegExp("(?<![A-Z0-9])(?:" + x + ")(?![A-Z0-9])");
+const CONCURSOS = [
+  ["TJ-AM",            W("TJ[ \\-_]?AM")],
+  ["PRF",              W("PRF")],
+  ["PF",               W("PF|POLICIA FEDERAL|ELITE FEDERAL|ROTA FEDERAL|RTF")],
+  ["Polícias AM",      W("POLICIAS|P[CMP] ?[\\-_ ]? ?AM|SOU MILITAR|ELITE POLICIAL|CBMAM")],
+  ["Polícias PA",      W("P[CM] ?[\\-_ ]? ?PA")],
+  ["SEDUC-AM",         W("SEDUC[ \\-_]?AM")],
+  ["SEDUC-PA",         W("SEDUC[ \\-_]?PA")],
+  ["INSS",             W("INSS")],
+  ["SEMSA",            W("SEMSA")],
+  ["SEMED",            W("SEMED")],
+  ["ManausPrev",       W("MANAUS ?PREV")],
+  ["ALEAM",            /ALEAM/],
+  ["MP-AM",            W("MP[ \\-_]?AM")],
+  ["SES-AM",           W("SES([ \\-_]?AM)?")],
+  ["DETRAN",           W("DETRAN")],
+  ["TCE",              W("TCE([ \\-_]?AM)?")],
+  ["SEFAZ",            W("SEFAZ")],
+  ["Guarda Municipal", W("GUARDA|GMM")],
+  ["CMM",              W("CMM")],
+  ["Pós-graduação",    /SOU POS|POS[ \-]*(POLICIAL|GRADUACAO|DIREITO|GESTAO)/],
+  ["Polícias (outros)", W("PC ?[\\-_ ]? ?(GO|RR)|RORAIMA|GOIAS|DELEGADO|BOMBEIROS?|POLICIA")],
+  ["Black Friday",     W("BLACK")],
+  ["Play Passei",      /PLAY ?PASSEI|SPOT ?FABIO|^PP /],
+  ["Delta (perfil)",   /DELTA/],
+  ["Alunos",           W("ALUNOS|COMPRADORES|CLIENTES")],
+  ["Tribunais",        W("TRIBUNAIS|TRT|TRE|TRF|TJ")],
+  ["SCVP (geral)",     /SCVP|SOU CONCURSEIRO/],
+];
+const CONC_CONTA = { "PLAYPASSEI":"Play Passei", "SPOTFABIO":"Play Passei" };   // sem etiqueta no nome → cai na frente da conta
+
+// Status da Meta: o que é normal, o que é aviso e o resto é erro
+const OC_OK = new Set([200, 441]);          // normal · preenchendo
+const OC_AVISO = new Set([450, 100]);       // sem uso há 30+ dias · sem uso há 2+ anos (expirando)
+const OURO_MIN_PADRAO = 5000;
+
+/* ================= UTIL ================= */
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
+const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toUpperCase();
+const nf1 = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 });
+const nf0 = new Intl.NumberFormat("pt-BR");
+const fmtN = n => n >= 1e6 ? nf1.format(n / 1e6) + " mi" : n >= 1000 ? nf1.format(n / 1000) + " mil" : nf0.format(n);
+const fmtDia = d => d ? d.slice(8, 10) + "/" + d.slice(5, 7) + "/" + d.slice(2, 4) : "—";
+const diasEntre = (a, b) => Math.round((Date.parse(b + "T00:00:00Z") - Date.parse(a + "T00:00:00Z")) / 864e5);
+const plural = (n, s, p) => nf0.format(n) + " " + (n === 1 ? s : p);
+
+/* ================= DADOS ================= */
+let D = null, P = [], S = [];
+const E = { tab: "geral", conta: "", conc: "", tipo: "", q: "", per: 1, ouroMin: OURO_MIN_PADRAO, ouroLook: false,
+            ord: "val", dir: -1, lim: 100 };
+
+function faixa(p){
+  if (p.hi == null || p.hi < 0) return "indisponível";
+  if (p.hi <= 1000) return "menos de 1 mil";
+  return p.lo === p.hi || p.lo == null ? fmtN(p.hi) : fmtN(p.lo) + " – " + fmtN(p.hi);
+}
+const piso = v => v == null || v < 0 ? null : Math.max(v, 1000);   // a Meta não informa abaixo de 1 mil
+
+// tamanho (teto da faixa) que o público tinha N dias antes da última foto; null = sem foto naquela data
+function antes(p, n){
+  if (p.s){ let v; for (const [off, , hi] of p.s) if (off <= -n) v = hi; return v === undefined ? null : piso(v); }
+  return p.d0 && diasEntre(p.d0, D.dia) >= n ? piso(p.hi) : null;       // sem série = não mudou na janela
+}
+function delta(p, n){
+  if (p._d[n] !== undefined) return p._d[n];
+  const a = antes(p, n), b = piso(p.hi);
+  return p._d[n] = (a == null || b == null) ? null : { abs: b - a, pct: a ? (b - a) / a : 0 };
+}
+
+function preparar(d){
+  D = d;
+  const grupos = new Map();
+  for (const r of d.publicos || []){
+    if (r.k === "saved") continue;
+    let g = grupos.get(r.id);
+    if (!g){ g = { ...r, contas: [], ai: null, ae: null, aiC: {}, uso: [], fora: true, _d: {} }; grupos.set(r.id, g); }
+    g.contas.push(r.acc);
+    if (r.ai != null){ g.ai = (g.ai || 0) + r.ai; g.aiC[r.acc] = r.ai; }
+    if (r.ae != null) g.ae = (g.ae || 0) + r.ae;
+    for (const u of r.uso || []) g.uso.push({ ...u, conta: r.acc });
+    if (!r.fora) g.fora = false;
+    if (r.s && !g.s) g.s = r.s;
+    if (r.d0 && (!g.d0 || r.d0 < g.d0)) g.d0 = r.d0;
+  }
+  P = [...grupos.values()].map(p => {
+    const nn = norm(p.n);
+    p.tipo = TIPO_DE[p.sub] || TIPOS[TIPOS.length - 1];
+    p.conc = (CONCURSOS.find(([, re]) => re.test(nn)) || [])[0] || CONC_CONTA[p.contas[0]] || "Sem etiqueta";
+    p.val = p.hi > 1000 ? p.hi : 0;
+    p.pronto = p.dc === 200;
+    p.emUso = p.ai > 0;
+    p.erro = p.oc != null && !OC_OK.has(p.oc) && !OC_AVISO.has(p.oc);
+    p.busca = nn + " " + p.id;
+    return p;
+  });
+  S = (d.publicos || []).filter(r => r.k === "saved").map(r => ({ ...r, val: r.hi > 1000 ? r.hi : 0, busca: norm(r.n) }));
+}
+const ehOuro = p => !p.fora && p.pronto && !p.emUso && p.val >= E.ouroMin && (E.ouroLook || p.tipo.k !== "look");
+const temBase = n => D.primeiro_dia && diasEntre(D.primeiro_dia, D.dia) >= n;
+
+function filtrados(lista = P){
+  const q = norm(E.q.trim());
+  return lista.filter(p => !p.fora
+    && (!E.conta || (p.contas || [p.acc]).includes(E.conta))
+    && (!E.conc || p.conc === E.conc)
+    && (!E.tipo || (p.tipo && p.tipo.k === E.tipo))
+    && (!q || p.busca.includes(q)));
+}
+
+/* ================= PEÇAS ================= */
+function dTxt(p, n){
+  const d = delta(p, n);
+  if (!d) return '<span class="zz" title="ainda sem foto dessa data">—</span>';
+  if (!d.abs) return '<span class="zz">=</span>';
+  const s = d.abs > 0;
+  return `<span class="${s ? "up" : "dn"}" title="${s ? "cresceu" : "encolheu"}">${s ? "▲" : "▼"} ${fmtN(Math.abs(d.abs))}</span> <span class="zz">${s ? "+" : "−"}${nf1.format(Math.abs(d.pct * 100))}%</span>`;
+}
+function spark(p, w = 96, h = 26){
+  if (!p.s || p.s.length < 2) return '<span class="zz">—</span>';
+  const v = p.s.map(x => piso(x[2]) ?? 0), o = p.s.map(x => x[0]);
+  const mn = Math.min(...v), mx = Math.max(...v), o0 = o[0], oN = o[o.length - 1] || 0;
+  const X = i => 3 + (w - 9) * (oN === o0 ? 1 : (o[i] - o0) / (oN - o0)), Y = i => 4 + (h - 8) * (mx === mn ? .5 : 1 - (v[i] - mn) / (mx - mn));
+  const pts = v.map((_, i) => X(i).toFixed(1) + "," + Y(i).toFixed(1)).join(" ");
+  const L = v.length - 1;
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="tendência dos últimos dias"><polyline points="${pts}" fill="none" stroke="var(--serie)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${X(L).toFixed(1)}" cy="${Y(L).toFixed(1)}" r="3.5" fill="var(--serie)" stroke="#fff" stroke-width="1.5"/></svg>`;
+}
+function pillUso(p){
+  if (p.ai == null) return '<span class="pill mut" title="uso não coletado para esta conta">—</span>';
+  if (p.ai > 0) return `<span class="pill uso">● em ${plural(p.ai, "conjunto", "conjuntos")}</span>`;
+  if (p.ae > 0) return '<span class="pill mut">só como exclusão</span>';
+  return '<span class="pill mut">parado</span>';
+}
+function pillStatus(p){
+  if (p.erro) return `<span class="pill bad">✕ erro</span>`;
+  if (p.dc === 300) return '<span class="pill mut">pequeno demais</span>';
+  if (p.oc === 100) return '<span class="pill warn">⚠ expirando</span>';
+  if (p.oc === 450) return '<span class="pill warn">⚠ sem uso há 30d+</span>';
+  if (p.oc === 441) return '<span class="pill ok">✓ pronto · preenchendo</span>';
+  return '<span class="pill ok">✓ pronto</span>';
+}
+const celNome = p => `<div class="pn">${esc(p.n)}</div><div class="pm">${esc(p.contas.join(" + "))}${p.contas.length > 1 ? " · compartilhado" : ""} · ${esc(p.conc)}${p.ret ? " · " + p.ret + " dias" : ""}</div>`;
+const celTipo = p => `<span class="tipo"><i style="background:${p.tipo.cor}"></i>${p.tipo.l}</span>`;
+
+// tabela genérica de públicos; cols = lista de chaves
+const COLS = {
+  nome:   { h: "Público",   o: "n",    c: celNome },
+  tipo:   { h: "Tipo",      o: "tipo", c: celTipo },
+  val:    { h: "Tamanho",   o: "val",  r: 1, c: p => `<b>${faixa(p)}</b>` },
+  d1:     { h: "Ontem",     o: "d1",   r: 1, c: p => dTxt(p, 1) },
+  d7:     { h: "7 dias",    o: "d7",   r: 1, c: p => dTxt(p, 7) },
+  d30:    { h: "30 dias",   o: "d30",  r: 1, c: p => dTxt(p, 30) },
+  per:    { h: "Variação",  r: 1, c: p => dTxt(p, E.per) },
+  tend:   { h: "Tendência", c: p => spark(p) },
+  uso:    { h: "Uso agora", o: "ai",   c: pillUso },
+  status: { h: "Status",    c: pillStatus },
+  criado: { h: "Criado",    o: "tc",   r: 1, c: p => fmtDia(p.tc) },
+};
+function tabela(lista, cols, ordenavel){
+  if (!lista.length) return '<div class="vazio">Nenhum público com esses filtros.</div>';
+  const th = cols.map(k => { const c = COLS[k], on = ordenavel && c.o === E.ord;
+    return `<th class="${c.r ? "r " : ""}${ordenavel && c.o ? "s" : ""}" ${ordenavel && c.o ? `data-ord="${c.o}"` : ""}>${c.h}${on ? (E.dir < 0 ? " ↓" : " ↑") : ""}</th>`; }).join("");
+  const tr = lista.map(p => `<tr class="lin" data-id="${p.id}">${cols.map(k => `<td class="${COLS[k].r ? "r n" : ""}">${COLS[k].c(p)}</td>`).join("")}</tr>`).join("");
+  return `<div class="tw"><table><thead><tr>${th}</tr></thead><tbody>${tr}</tbody></table></div>`;
+}
+const chaveOrd = { n: p => norm(p.n), tipo: p => p.tipo.l, val: p => p.val, ai: p => (p.ai || 0) * 1000 + (p.ae || 0), tc: p => p.tc || "",
+  d1: p => (delta(p, 1) || {}).abs ?? -Infinity, d7: p => (delta(p, 7) || {}).abs ?? -Infinity, d30: p => (delta(p, 30) || {}).abs ?? -Infinity };
+function ordenar(l){ const f = chaveOrd[E.ord] || chaveOrd.val; return [...l].sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * E.dir || b.val - a.val; }); }
+
+/* ================= ABAS ================= */
+function vGeral(){
+  const L = filtrados();
+  const prontos = L.filter(p => p.pronto), uso = L.filter(p => p.emUso), ouro = L.filter(ehOuro);
+  const sobe = L.filter(p => (delta(p, 1) || {}).abs > 0).length, desce = L.filter(p => (delta(p, 1) || {}).abs < 0).length;
+  const b1 = temBase(1);
+  let h = `<div class="kpis">
+    <div class="tk"><div class="l">Públicos</div><div class="v">${nf0.format(L.length)}</div><div class="s">personalizados e semelhantes, sem repetir os compartilhados</div></div>
+    <div class="tk"><div class="l">Prontos para uso</div><div class="v">${nf0.format(prontos.length)}</div><div class="s">${nf0.format(L.length - prontos.length)} pequenos demais para entregar</div></div>
+    <div class="tk"><div class="l">Em uso agora</div><div class="v">${nf0.format(uso.length)}</div><div class="s">incluídos em conjunto ativo</div></div>
+    <div class="tk ouro" data-ir="ouro"><div class="l">Ouro parado</div><div class="v">${nf0.format(ouro.length)}</div><div class="s">prontos, com ${fmtN(E.ouroMin)}+ pessoas e fora de conjunto ativo →</div></div>
+    <div class="tk"><div class="l">Movimento desde ontem</div><div class="v">${b1 ? `<span class="up">▲ ${sobe}</span> <span class="dn">▼ ${desce}</span>` : "—"}</div><div class="s">${b1 ? "cresceram · encolheram" : "as setas começam na próxima foto (06h)"}</div></div>
+  </div>`;
+
+  // conta × tipo
+  const contas = [...new Set(L.flatMap(p => p.contas))].filter(c => !E.conta || c === E.conta).sort();
+  const maxC = Math.max(1, ...contas.map(c => L.filter(p => p.contas.includes(c)).length));
+  h += `<div class="grid g-two"><div class="card"><div class="card-head"><div><h2>Por conta e tipo</h2><div class="hint">Quantos públicos de cada tipo existem em cada conta. Público compartilhado conta nas duas.</div></div></div>
+    <div class="legenda">${TIPOS.filter(t => L.some(p => p.tipo === t)).map(t => `<span><i style="background:${t.cor}"></i>${t.l}</span>`).join("")}</div>`;
+  for (const c of contas){
+    const lc = L.filter(p => p.contas.includes(c));
+    h += `<div class="brow"><div class="name" title="${esc(c)}">${esc(c)}</div><div class="track" style="width:${Math.max(4, lc.length / maxC * 100)}%">` +
+      TIPOS.map(t => { const n = lc.filter(p => p.tipo === t).length; return n ? `<div class="sg" style="flex:${n};background:${t.cor}" title="${esc(c)} · ${t.l}: ${nf0.format(n)}"></div>` : ""; }).join("") +
+      `</div><div class="num">${nf0.format(lc.length)}</div></div>`;
+  }
+  h += `<div class="tw" style="margin-top:12px"><table><thead><tr><th>Conta</th>${TIPOS.map(t => `<th class="r">${t.l}</th>`).join("")}<th class="r" title="incluídos em conjunto ativo desta conta">Em uso</th></tr></thead><tbody>` +
+    contas.map(c => { const lc = L.filter(p => p.contas.includes(c));
+      return `<tr><td><b>${esc(c)}</b></td>${TIPOS.map(t => `<td class="r n">${nf0.format(lc.filter(p => p.tipo === t).length)}</td>`).join("")}<td class="r n">${nf0.format(lc.filter(p => p.aiC[c] > 0).length)}</td></tr>`; }).join("") +
+    `</tbody></table></div></div>`;
+
+  // por concurso
+  const porC = {};
+  for (const p of L){ const o = porC[p.conc] ??= { n: 0, pr: 0, uso: 0, ouro: 0, top: null }; o.n++; if (p.pronto) o.pr++; if (p.emUso) o.uso++; if (ehOuro(p)) o.ouro++;
+    if (p.pronto && p.tipo.k !== "look" && (!o.top || p.val > o.top.val)) o.top = p; }
+  h += `<div class="card"><div class="card-head"><div><h2>Por concurso</h2><div class="hint">Lido do nome do público. Clique na linha para filtrar. "Maior público" ignora os semelhantes.</div></div></div>
+    <div class="tw"><table><thead><tr><th>Concurso</th><th class="r">Públicos</th><th class="r">Prontos</th><th class="r">Em uso</th><th class="r">Ouro parado</th><th>Maior público pronto</th></tr></thead><tbody>` +
+    Object.entries(porC).sort((a, b) => b[1].ouro - a[1].ouro || b[1].n - a[1].n).map(([c, o]) =>
+      `<tr class="lk" data-conc="${esc(c)}"><td><b>${esc(c)}</b></td><td class="r n">${nf0.format(o.n)}</td><td class="r n">${nf0.format(o.pr)}</td><td class="r n">${o.uso || '<span class="zz">0</span>'}</td><td class="r n">${o.ouro ? `<span class="pill gold">${o.ouro}</span>` : '<span class="zz">0</span>'}</td><td>${o.top && o.top.val ? `${esc(o.top.n.slice(0, 60))} <span class="zz">· ${faixa(o.top)}</span>` : '<span class="zz">—</span>'}</td></tr>`).join("") +
+    `</tbody></table></div></div></div>`;
+  return h;
+}
+
+function vMovimento(){
+  const L = filtrados(), n = E.per;
+  const seg = `<div class="seg" id="seg-per">${[[1, "Desde ontem"], [7, "7 dias"], [30, "30 dias"]].map(([v, l]) => `<button class="${v === n ? "on" : ""}" data-per="${v}">${l}</button>`).join("")}</div>`;
+  let h = "";
+  if (!temBase(n)) h += `<div class="aviso">A primeira foto geral é de <b>${fmtDia(D.primeiro_dia)}</b>. Para comparar ${n === 1 ? "com ontem" : "com " + n + " dias atrás"} é preciso ${n === 1 ? "a foto de amanhã (06h)" : "acumular " + n + " dias de fotos"} — até lá só aparecem os públicos que já tinham histórico.</div>`;
+  const com = L.filter(p => delta(p, n) && delta(p, n).abs);
+  const sobe = com.filter(p => delta(p, n).abs > 0).sort((a, b) => delta(b, n).abs - delta(a, n).abs).slice(0, 20);
+  const desce = com.filter(p => delta(p, n).abs < 0).sort((a, b) => delta(a, n).abs - delta(b, n).abs).slice(0, 20);
+  const cols = ["nome", "tipo", "val", "per", "tend"];
+  h += `<div class="card"><div class="card-head"><div><h2>Quem mais cresceu</h2><div class="hint">Maior ganho de pessoas no período (pela faixa da Meta, que anda em degraus).</div></div>${seg}</div>${sobe.length ? tabela(sobe, cols) : '<div class="vazio">Nenhum público cresceu nesse período.</div>'}</div>`;
+  h += `<div class="card"><div class="card-head"><div><h2>Quem mais encolheu</h2><div class="hint">Público encolhendo costuma ser janela de retenção vencendo sem gente nova entrando.</div></div></div>${desce.length ? tabela(desce, cols) : '<div class="vazio">Nenhum público encolheu nesse período.</div>'}</div>`;
+  const jan = Math.max(n, 7);
+  const novos = L.filter(p => p.tc && diasEntre(p.tc, D.dia) <= jan).sort((a, b) => (b.tc > a.tc ? 1 : -1));
+  h += `<div class="card"><div class="card-head"><div><h2>Criados nos últimos ${jan} dias</h2><div class="hint">Pela data de criação na Meta.</div></div></div>${novos.length ? tabela(novos.slice(0, 60), ["nome", "tipo", "val", "criado", "uso", "status"]) : '<div class="vazio">Nenhum público novo.</div>'}</div>`;
+  const q = norm(E.q.trim());
+  const sumiu = P.filter(p => p.fora && (!E.conta || p.contas.includes(E.conta)) && (!E.conc || p.conc === E.conc) && (!q || p.busca.includes(q)));
+  if (sumiu.length) h += `<div class="card"><div class="card-head"><div><h2>Sumiram da conta</h2><div class="hint">Estavam numa foto anterior e não vieram na última (apagados ou descompartilhados). Último dia visto na coluna.</div></div></div>
+    <div class="tw"><table><thead><tr><th>Público</th><th>Tipo</th><th class="r">Último tamanho</th><th class="r">Visto até</th></tr></thead><tbody>${sumiu.map(p => `<tr><td>${celNome(p)}</td><td>${celTipo(p)}</td><td class="r n">${faixa(p)}</td><td class="r n">${fmtDia(p.ls)}</td></tr>`).join("")}</tbody></table></div></div>`;
+  return h;
+}
+
+function vOuro(){
+  const L = filtrados().filter(ehOuro).sort((a, b) => b.val - a.val);
+  const seg = `<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><label class="chk"><input type="checkbox" id="ouro-look" ${E.ouroLook ? "checked" : ""}> incluir semelhantes</label>
+    <div class="seg" id="seg-ouro">${[1001, 5000, 10000, 50000].map(v => `<button class="${v === E.ouroMin ? "on" : ""}" data-min="${v}">${v === 1001 ? "1 mil+" : fmtN(v) + "+"}</button>`).join("")}</div></div>`;
+  let h = `<div class="card"><div class="card-head"><div><h2>Ouro parado · ${plural(L.length, "público", "públicos")}</h2>
+    <div class="hint">Prontos para uso, com gente dentro e que hoje não estão incluídos em nenhum conjunto ativo. Quando a Meta marca "sem uso há 30d+", o tamanho mostrado pode estar defasado — ele se atualiza quando o público volta a rodar. "Expirando" = mais de 2 anos sem uso: se não for usado, a Meta apaga.</div></div>${seg}</div>`;
+  if (!L.length) return h + '<div class="vazio">Nada nesse corte.</div></div>';
+  const porC = {};
+  for (const p of L) (porC[p.conc] ??= []).push(p);
+  for (const [c, l] of Object.entries(porC).sort((a, b) => b[1][0].val - a[1][0].val)){
+    h += `<h3 class="grp">${esc(c)} <small>${plural(l.length, "público", "públicos")} · maior: ${faixa(l[0])}</small></h3>` + tabela(l.slice(0, 25), ["nome", "tipo", "val", "d7", "criado", "status"]);
+    if (l.length > 25) h += `<div class="note">+ ${l.length - 25} menores — use o filtro de concurso e a aba Todos para ver a lista inteira.</div>`;
+  }
+  return h + "</div>";
+}
+
+function vSaude(){
+  const L = filtrados();
+  const usoRuim = L.filter(p => (p.ai > 0 || p.ae > 0) && (p.dc !== 200 || p.erro));
+  const erros = L.filter(p => p.erro);
+  const expira = L.filter(p => p.oc === 100 && p.val > 0).sort((a, b) => b.val - a.val);
+  const pequenos = L.filter(p => p.dc === 300);
+  const dup = {};
+  for (const p of L) if (p.val >= 2000 && p.tipo.k !== "look") (dup[[p.contas[0], p.sub, p.ret, p.lo, p.hi].join("|")] ??= []).push(p);
+  const dups = Object.values(dup).filter(g => g.length > 1).sort((a, b) => b[0].val - a[0].val);
+  const st = D.status || {};
+  let h = `<div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+    <div class="tk"><div class="l">Em uso com problema</div><div class="v ${usoRuim.length ? "dn" : ""}">${usoRuim.length}</div><div class="s">em conjunto ativo, mas a Meta não entrega</div></div>
+    <div class="tk"><div class="l">Com erro</div><div class="v">${erros.length}</div><div class="s">criação ou preenchimento falhou</div></div>
+    <div class="tk"><div class="l">Expirando</div><div class="v">${nf0.format(L.filter(p => p.oc === 100).length)}</div><div class="s">2+ anos sem uso · ${expira.length} ainda com gente</div></div>
+    <div class="tk"><div class="l">Pequenos demais</div><div class="v">${nf0.format(pequenos.length)}</div><div class="s">a Meta não deixa usar em campanha</div></div>
+  </div>`;
+  h += `<div class="card"><div class="card-head"><div><h2>Em uso com problema</h2><div class="hint">Público que está num conjunto ativo (incluído ou excluído) e que a Meta marca como não entregável ou com erro. É o que mais merece olhar.</div></div></div>${usoRuim.length ? tabela(usoRuim, ["nome", "tipo", "val", "uso", "status"]) : '<div class="vazio">Nenhum. Tudo que está rodando está entregável.</div>'}</div>`;
+  if (erros.length){
+    const porCod = {};
+    for (const p of erros) (porCod[p.oc] ??= []).push(p);
+    h += `<div class="card"><div class="card-head"><div><h2>Com erro</h2><div class="hint">Agrupado pela mensagem da Meta.</div></div></div>` +
+      Object.entries(porCod).sort((a, b) => b[1].length - a[1].length).map(([c, l]) => `<h3 class="grp">${plural(l.length, "público", "públicos")} <small>${esc(st[c] || "código " + c)}</small></h3>` + tabela(l.sort((a, b) => b.val - a.val).slice(0, 15), ["nome", "tipo", "val", "criado"]) + (l.length > 15 ? `<div class="note">+ ${l.length - 15} com o mesmo erro.</div>` : "")).join("") + `</div>`;
+  }
+  h += `<div class="card"><div class="card-head"><div><h2>Expirando e ainda com gente</h2><div class="hint">Mais de 2 anos sem entrar num conjunto ativo. Os maiores primeiro.</div></div></div>${expira.length ? tabela(expira.slice(0, 40), ["nome", "tipo", "val", "criado", "uso"]) + (expira.length > 40 ? `<div class="note">+ ${expira.length - 40} menores.</div>` : "") : '<div class="vazio">Nenhum.</div>'}</div>`;
+  h += `<div class="card"><div class="card-head"><div><h2>Prováveis duplicados</h2><div class="hint">Mesma conta, mesmo tipo, mesma retenção e exatamente a mesma faixa de tamanho (2 mil+). É indício, não certeza.</div></div></div>` +
+    (dups.length ? dups.slice(0, 30).map(g => `<h3 class="grp">${faixa(g[0])} <small>${esc(g[0].contas[0])} · ${g[0].tipo.l}${g[0].ret ? " · " + g[0].ret + " dias" : ""}</small></h3>` + tabela(g, ["nome", "criado", "uso", "status"])).join("") : '<div class="vazio">Nenhum par suspeito.</div>') + `</div>`;
+  return h;
+}
+
+function vTodos(){
+  const L = ordenar(filtrados());
+  return `<div class="card"><div class="card-head"><div><h2>Todos os públicos · ${nf0.format(L.length)}</h2><div class="hint">Clique no cabeçalho para ordenar e na linha para ver o detalhe.</div></div></div>` +
+    tabela(L.slice(0, E.lim), ["nome", "tipo", "val", "d1", "d7", "d30", "tend", "uso", "status"], true) +
+    (L.length > E.lim ? `<button class="mais" id="mais">mostrar mais ${Math.min(200, L.length - E.lim)} de ${nf0.format(L.length - E.lim)}</button>` : "") + `</div>`;
+}
+
+function vSalvos(){
+  const q = norm(E.q.trim());
+  const L = S.filter(r => !r.fora && (!E.conta || r.acc === E.conta) && (!q || r.busca.includes(q))).sort((a, b) => b.val - a.val);
+  return `<div class="card"><div class="card-head"><div><h2>Públicos salvos · ${nf0.format(L.length)}</h2><div class="hint">Segmentações salvas (interesses, idade, região). O tamanho é o alcance estimado pela Meta; aqui não há seta de tendência nem uso por conjunto, porque o conjunto copia a segmentação em vez de apontar para o público salvo.</div></div></div>` +
+    (L.length ? `<div class="tw"><table><thead><tr><th>Público salvo</th><th>Conta</th><th class="r">Alcance estimado</th><th class="r">Criado</th></tr></thead><tbody>${L.slice(0, 400).map(r => `<tr><td><div class="pn">${esc(r.n)}</div></td><td>${esc(r.acc)}</td><td class="r n"><b>${faixa(r)}</b></td><td class="r n">${fmtDia(r.tc)}</td></tr>`).join("")}</tbody></table></div>` : '<div class="vazio">Nenhum público salvo com esses filtros.</div>') + `</div>`;
+}
+
+const ABAS = [["geral", "Visão geral", vGeral], ["mov", "Movimento", vMovimento], ["ouro", "Ouro parado", vOuro], ["saude", "Saúde", vSaude], ["todos", "Todos", vTodos], ["salvos", "Salvos", vSalvos]];
+
+/* ================= RENDER ================= */
+function render(){
+  const L = filtrados();
+  const cont = { geral: "", mov: "", ouro: L.filter(ehOuro).length, saude: L.filter(p => p.erro || ((p.ai > 0 || p.ae > 0) && p.dc !== 200)).length, todos: L.length, salvos: S.length };
+  $("tabs").innerHTML = ABAS.map(([k, l]) => `<button class="tab ${k === E.tab ? "on" : ""}" data-tab="${k}">${l}${cont[k] !== "" ? `<span class="c">${nf0.format(cont[k])}</span>` : ""}</button>`).join("");
+  $("conteudo").innerHTML = ABAS.find(a => a[0] === E.tab)[2]();
+}
+function cabecalho(){
+  $("dia").textContent = fmtDia(D.dia);
+  const col = D.coleta || [];
+  const quando = col.map(c => c.collected_at).sort().pop();
+  $("colhido").innerHTML = quando ? "coletada às <b>" + new Date(quando).toLocaleTimeString("pt-BR", { timeZone: "America/Manaus", hour: "2-digit", minute: "2-digit" }) + "</b> (Manaus)" : "";
+  $("coleta").innerHTML = col.map(c => c.ok_custom
+    ? `<div class="cd" title="${c.n_adsets ?? "?"} conjuntos ativos lidos"><span class="l">${esc(c.ad_account_name)}</span><b>${nf0.format(c.n_custom)}</b> públicos${c.n_saved ? " + " + c.n_saved + " salvos" : ""}</div>`
+    : `<div class="cd off" title="${esc(c.erro || "")}"><span class="l">${esc(c.ad_account_name)}</span><b>${/permiss/.test(c.erro || "") ? "sem permissão no token" : "coleta falhou"}</b></div>`).join("");
+  const hoje = new Date().toLocaleDateString("en-CA", { timeZone: "America/Manaus" });
+  const av = [];
+  if (D.dia && diasEntre(D.dia, hoje) >= 1 && new Date().toLocaleTimeString("en-GB", { timeZone: "America/Manaus" }) > "06:30") av.push(`A última foto é de <b>${fmtDia(D.dia)}</b> — a coleta de hoje (06h) ainda não chegou. Os números abaixo são daquele dia.`);
+  const falhas = col.filter(c => !c.ok_custom && !/permiss/.test(c.erro || ""));
+  if (falhas.length) av.push("Coleta com falha em: " + falhas.map(c => `<b>${esc(c.ad_account_name)}</b> (${esc(c.erro || "")})`).join(", ") + ". Para essas contas vale a foto anterior.");
+  $("avisos").innerHTML = av.map(a => `<div class="aviso">${a}</div>`).join("");
+}
+function filtrosUI(){
+  const contas = [...new Set(P.flatMap(p => p.contas))].sort(), concs = [...new Set(P.map(p => p.conc))].sort((a, b) => a.localeCompare(b, "pt-BR"));
+  $("f-conta").innerHTML = '<option value="">Todas as contas</option>' + contas.map(c => `<option>${esc(c)}</option>`).join("");
+  $("f-conc").innerHTML = '<option value="">Todos os concursos</option>' + concs.map(c => `<option>${esc(c)}</option>`).join("");
+  $("f-tipo").innerHTML = '<option value="">Todos os tipos</option>' + TIPOS.filter(t => P.some(p => p.tipo === t)).map(t => `<option value="${t.k}">${t.l}</option>`).join("");
+  $("f-conta").value = E.conta; $("f-conc").value = E.conc; $("f-tipo").value = E.tipo;
+}
+
+/* ================= GAVETA ================= */
+function abrir(id){
+  const p = P.find(x => x.id === id); if (!p) return;
+  const st = (D.status || {})[p.oc];
+  let g = `<button class="x" id="gx" aria-label="Fechar">✕</button><h2>${esc(p.n)}</h2>
+    <div class="big">${faixa(p)}</div><div class="pm">pessoas (faixa estimada pela Meta)</div>
+    <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">${pillStatus(p)} ${pillUso(p)}</div>`;
+  if (p.s && p.s.length > 1) g += `<h4>Tamanho nos últimos dias</h4><div class="chart" id="gchart"></div>
+    <div class="kv" style="margin-top:8px"><span>Desde ontem</span><b>${dTxt(p, 1)}</b><span>7 dias</span><b>${dTxt(p, 7)}</b><span>30 dias</span><b>${dTxt(p, 30)}</b></div>`;
+  else g += `<h4>Tamanho nos últimos dias</h4><div class="st">${p.d0 && p.d0 < D.dia ? "Sem mudança desde " + fmtDia(p.d0) + "." : "Primeira foto em " + fmtDia(p.d0 || D.dia) + " — a tendência aparece a partir da próxima coleta."}</div>`;
+  g += `<div class="kv"><span>Conta</span><b>${esc(p.contas.join(" + "))}${p.contas.length > 1 ? " (compartilhado)" : ""}</b>
+    <span>Concurso</span><b>${esc(p.conc)}</b><span>Tipo</span><b>${celTipo(p)}</b>
+    <span>Retenção</span><b>${p.ret ? p.ret + " dias" : "—"}</b>
+    <span>Criado em</span><b>${fmtDia(p.tc)}</b><span>Alterado em</span><b>${fmtDia(p.tu)}</b>
+    <span>ID</span><b>${p.id}<button class="copiar" data-copia="${p.id}">copiar</button></b></div>`;
+  if (st || p.dc === 300) g += `<h4>O que a Meta diz</h4><div class="st">${p.dc === 300 ? "O público é muito pequeno para ser usado na criação da campanha. " : ""}${esc(st || "")}</div>`;
+  g += `<h4>Onde está em uso agora</h4>` + (p.uso.length
+    ? p.uso.map(u => `<div class="u"><span class="pill ${u.m === "incl" ? "uso" : "mut"}">${u.m === "incl" ? "incluído" : "excluído"}</span> ${esc(u.s)}<small>${esc(u.c)} · ${esc(u.conta)}</small></div>`).join("")
+    : `<div class="st">${p.ai == null ? "Uso não coletado para esta conta." : "Em nenhum conjunto ativo."}</div>`);
+  const acc = CONTAS[p.contas[0]];
+  if (acc) g += `<h4>Atalho</h4><a href="https://adsmanager.facebook.com/adsmanager/audiences?act=${acc}" target="_blank" rel="noopener">Abrir os públicos da conta ${esc(p.contas[0])} no Gerenciador ↗</a>`;
+  $("gav").innerHTML = g; $("gav").style.display = "block"; $("veu").style.display = "block";
+  if (p.s && p.s.length > 1) grafico(p);
+}
+const fechar = () => { $("gav").style.display = "none"; $("veu").style.display = "none"; };
+
+// gráfico da gaveta: uma série (teto da faixa), eixo com mín/máx, cruz + dica ao passar o mouse
+function grafico(p){
+  const W_ = 460, H = 150, ml = 8, mr = 56, mt = 14, mb = 22;
+  const v = p.s.map(x => piso(x[2]) ?? 0), o = p.s.map(x => x[0]);
+  const mn = Math.min(...v), mx = Math.max(...v), o0 = o[0], oN = o[o.length - 1];
+  const X = i => ml + (W_ - ml - mr) * (oN === o0 ? 1 : (o[i] - o0) / (oN - o0)), Y = x => mt + (H - mt - mb) * (mx === mn ? .5 : 1 - (x - mn) / (mx - mn));
+  const dataDe = off => { const d = new Date(Date.parse(D.dia + "T00:00:00Z") + off * 864e5).toISOString().slice(0, 10); return d.slice(8, 10) + "/" + d.slice(5, 7); };
+  const pts = v.map((x, i) => X(i).toFixed(1) + "," + Y(x).toFixed(1)).join(" "), L = v.length - 1;
+  $("gchart").innerHTML = `<svg viewBox="0 0 ${W_} ${H}" role="img" aria-label="Tamanho do público por dia">
+    <line x1="${ml}" x2="${W_ - mr}" y1="${Y(mx)}" y2="${Y(mx)}" stroke="var(--grid)"/><line x1="${ml}" x2="${W_ - mr}" y1="${Y(mn)}" y2="${Y(mn)}" stroke="var(--grid)"/>
+    <text x="${W_ - mr + 6}" y="${Y(mx) + 4}" font-size="11" fill="var(--muted)">${fmtN(mx)}</text>${mx !== mn ? `<text x="${W_ - mr + 6}" y="${Y(mn) + 4}" font-size="11" fill="var(--muted)">${fmtN(mn)}</text>` : ""}
+    <text x="${ml}" y="${H - 5}" font-size="11" fill="var(--muted)">${dataDe(o0)}</text><text x="${W_ - mr}" y="${H - 5}" font-size="11" fill="var(--muted)" text-anchor="end">${dataDe(oN)}</text>
+    <polyline points="${pts}" fill="none" stroke="var(--serie)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+    <line id="gcx" y1="${mt}" y2="${H - mb}" stroke="var(--ink-2)" stroke-width="1" style="display:none"/>
+    <circle id="gcd" r="4.5" fill="var(--serie)" stroke="#fff" stroke-width="2" cx="${X(L)}" cy="${Y(v[L])}"/></svg><div class="tip" id="gtip"></div>`;
+  const svg = $("gchart").querySelector("svg"), tip = $("gtip"), cx = $("gcx"), cd = $("gcd");
+  svg.addEventListener("mousemove", ev => {
+    const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * W_;
+    let i = 0; for (let j = 1; j < v.length; j++) if (Math.abs(X(j) - x) < Math.abs(X(i) - x)) i = j;
+    cx.setAttribute("x1", X(i)); cx.setAttribute("x2", X(i)); cx.style.display = "";
+    cd.setAttribute("cx", X(i)); cd.setAttribute("cy", Y(v[i]));
+    tip.textContent = dataDe(o[i]) + " · " + (p.s[i][2] <= 1000 ? "menos de 1 mil" : fmtN(p.s[i][1]) + " – " + fmtN(p.s[i][2]));
+    tip.style.display = "block"; tip.style.left = (X(i) / W_ * r.width) + "px"; tip.style.top = (Y(v[i]) / H * r.height) + "px";
+  });
+  svg.addEventListener("mouseleave", () => { tip.style.display = "none"; cx.style.display = "none"; cd.setAttribute("cx", X(L)); cd.setAttribute("cy", Y(v[L])); });
+}
+
+/* ================= EVENTOS ================= */
+document.addEventListener("click", ev => {
+  const t = ev.target, q = s => t.closest(s);
+  let el;
+  if ((el = q("[data-copia]"))){ navigator.clipboard?.writeText(el.dataset.copia); el.textContent = "copiado"; return; }
+  if (q("#gx") || t.id === "veu") return fechar();
+  if ((el = q(".tab"))){ E.tab = el.dataset.tab; E.lim = 100; return render(); }
+  if ((el = q("[data-ir]"))){ E.tab = el.dataset.ir; window.scrollTo({ top: 0 }); return render(); }
+  if ((el = q("[data-per]"))){ E.per = +el.dataset.per; return render(); }
+  if ((el = q("[data-min]"))){ E.ouroMin = +el.dataset.min; return render(); }
+  if ((el = q("th[data-ord]"))){ const o = el.dataset.ord; if (E.ord === o) E.dir = -E.dir; else { E.ord = o; E.dir = o === "n" || o === "tipo" ? 1 : -1; } return render(); }
+  if ((el = q("tr[data-conc]"))){ E.conc = el.dataset.conc; E.tab = "todos"; $("f-conc").value = E.conc; window.scrollTo({ top: 0 }); return render(); }
+  if ((el = q("tr[data-id]"))) return abrir(el.dataset.id);
+  if (t.id === "mais"){ E.lim += 200; return render(); }
+  if (t.id === "f-limpar"){ E.conta = E.conc = E.tipo = E.q = ""; $("f-q").value = ""; filtrosUI(); return render(); }
+});
+document.addEventListener("change", ev => {
+  const t = ev.target;
+  if (t.id === "f-conta") E.conta = t.value; else if (t.id === "f-conc") E.conc = t.value; else if (t.id === "f-tipo") E.tipo = t.value;
+  else if (t.id === "ouro-look") E.ouroLook = t.checked; else return;
+  E.lim = 100; render();
+});
+let tq; $("f-q").addEventListener("input", ev => { clearTimeout(tq); tq = setTimeout(() => { E.q = ev.target.value; E.lim = 100; render(); }, 180); });
+document.addEventListener("keydown", ev => { if (ev.key === "Escape") fechar(); });
+
+/* ================= CARGA ================= */
+async function load(){
+  try{
+    const r = await fetch(API + "?k=" + encodeURIComponent(K), { headers: { Authorization: "Bearer " + ANON, apikey: ANON } });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    if (!d.dia) throw new Error("ainda não há nenhuma foto gravada");
+    preparar(d); $("err").style.display = "none";
+    cabecalho(); filtrosUI(); render();
+  }catch(e){
+    $("err").style.display = "block";
+    $("err").textContent = "Falha ao carregar os dados: " + e.message + (K ? "" : " — confira o token ?k= na URL.");
+  }
+}
+load();
+setInterval(load, 30 * 60 * 1000);
+</script>
+</body>
+</html>
